@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import Vehicule from './models/vehiculeModel.js';
 
 const app = express();
 
@@ -51,6 +52,17 @@ app.get('/vehicule/search/:immatriculation', (req, res) => {
 app.get('/vehicule/price/:max', (req, res) => {
     res.send('Get vehicule by price range');
 });
+
+// Creation of the Vehicle class instance
+const vehicule = new Vehicule({
+    brand: 'Toyota',
+    model: 'Corolla',
+    registrationNo: 'ABC123',
+    year: 2019,
+    rentalPrice: 100
+});
+
+console.log(vehicule);
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
