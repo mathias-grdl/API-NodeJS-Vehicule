@@ -5,7 +5,7 @@ REST API for managing vehicle information in a dealership or fleet management sy
 
 ## Base URL
 ```
-https://api.vehiclemanager.com/v1
+http://localhost:3000
 ```
 
 ## Data Models
@@ -18,7 +18,7 @@ https://api.vehiclemanager.com/v1
 | model          | string | Vehicle model name             | Yes      |
 | registrationNo | string | License plate number           | Yes      |
 | year           | number | Manufacturing year             | Yes      |
-| price          | number | Vehicle price in EUR           | Yes      |
+| rentalPrice          | number | Vehicle rental price in EUR           | Yes      |
 
 ## API Endpoints
 

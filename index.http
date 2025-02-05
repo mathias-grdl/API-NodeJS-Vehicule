@@ -1,0 +1,23 @@
+### Test API
+GET http://localhost:3000/
+
+### Create new vehicule
+POST http://localhost:3000/vehicule
+
+### Get all vehicules
+GET http://localhost:3000/vehicules
+
+### Get vehicule by ID
+GET http://localhost:3000/vehicule/1
+
+### Update vehicule
+PUT http://localhost:3000/vehicule/1
+
+### Delete vehicule
+DELETE http://localhost:3000/vehicule/1
+
+### Search vehicule by registration
+GET http://localhost:3000/vehicule/search/AB123CD
+
+### Get vehicules by price
+GET http://localhost:3000/vehicule/price/50000
