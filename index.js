@@ -1,17 +1,25 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import Vehicule from './models/vehiculeModel.js';
+import pino from 'pino';
+import { pinoHttp } from 'pino-http';
+
 
 const app = express();
-
 app.use(bodyParser.json());
 
-const MyLoggerMiddleware = (req, res, next) => {
-    console.log('Request received at: ', new Date());
-    next();
-}
+const logger = pino({
+    level: process.env.LOG_LEVEL || 'info',
+    transport: {
+        target: 'pino-pretty',
+        options: {
+            colorize: true,
+            destination: 1
+        }
+    },
+});
 
-app.use(MyLoggerMiddleware)
+//logger pino
+app.use(pinoHttp({ logger }));
 
 // Main route - API Test
 app.get('/', (req, res) => {
@@ -52,17 +60,6 @@ app.get('/vehicule/search/:immatriculation', (req, res) => {
 app.get('/vehicule/price/:max', (req, res) => {
     res.send('Get vehicule by price range');
 });
-
-// Creation of the Vehicle class instance
-const vehicule = new Vehicule({
-    brand: 'Toyota',
-    model: 'Corolla',
-    registrationNo: 'ABC123',
-    year: 2019,
-    rentalPrice: 100
-});
-
-console.log(vehicule);
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
