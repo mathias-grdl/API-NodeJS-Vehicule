@@ -64,7 +64,7 @@ DELETE /vehicles/{id}
 - `id` (path) - Vehicle ID
 
 **Responses:**
-- `200 OK`: Vehicle deleted
+- `204 OK`: Vehicle deleted
 - `404 Not Found`: Vehicle not found
 - `500 Internal Server Error`: Server error
 

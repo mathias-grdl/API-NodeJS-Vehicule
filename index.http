@@ -3,21 +3,44 @@ GET http://localhost:3000/
 
 ### Create new vehicule
 POST http://localhost:3000/vehicule
+Content-Type: application/json
+
+{
+    "brand": "audi",
+    "model": "A4",
+    "licensePlate": "AB123CD",
+    "year": 2019,
+    "rentalPrice": 15000
+}
 
 ### Get all vehicules
 GET http://localhost:3000/vehicules
 
-### Get vehicule by ID
-GET http://localhost:3000/vehicule/1
 
 ### Update vehicule
-PUT http://localhost:3000/vehicule/1
+PUT http://localhost:3000/vehicule/5447b339-2c0b-41ea-a2eb-fd052156acf9
+Content-Type: application/json
+
+{
+    "brand": "vvv",
+    "model": "Passat",
+    "licensePlate": "TZ053EQ",
+    "year": 2018,
+    "rentalPrice": 50000
+}
 
 ### Delete vehicule
-DELETE http://localhost:3000/vehicule/1
+DELETE http://localhost:3000/vehicule/eefeea1a-626a-43fc-b68a-8e6657ee06a0
+
+
+### Get vehicule by ID
+GET http://localhost:3000/vehicule/349e4f7e-15d4-4f5c-8f69-04ae2c958ee1
+
 
 ### Search vehicule by registration
-GET http://localhost:3000/vehicule/search/AB123CD
+GET http://localhost:3000/vehicule/search/TE890YN
 
 ### Get vehicules by price
-GET http://localhost:3000/vehicule/price/50000
+GET http://localhost:3000/vehicule/price/20000
+
+
