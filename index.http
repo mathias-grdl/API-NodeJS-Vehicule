@@ -18,7 +18,7 @@ GET http://localhost:3000/vehicules
 
 
 ### Update vehicule
-PUT http://localhost:3000/vehicule/8d11f7aa-4089-4a57-9719-6cf469e6da24
+PUT http://localhost:3000/vehicule/beed96ef-45ac-44cb-8130-722455206f7c
 Content-Type: application/json
 
 {
@@ -30,15 +30,15 @@ Content-Type: application/json
 }
 
 ### Delete vehicule
-DELETE http://localhost:3000/vehicule/8d11f7aa-4089-4a57-9719-6cf469e6da24
+DELETE http://localhost:3000/vehicule/beed96ef-45ac-44cb-8130-722455206f7c
 
 
 ### Get vehicule by ID
-GET http://localhost:3000/vehicule/fa7e847b-5796-45ab-8590-4bc0fd6484d6
+GET http://localhost:3000/vehicule/9064e6c4-9e7f-4092-bff6-f16212381252
 
 
 ### Search vehicule by registration
-GET http://localhost:3000/vehicule/search/SG057PP
+GET http://localhost:3000/vehicule/search/IE503DM
 
 ### Get vehicules by price
 GET http://localhost:3000/vehicule/price/50000
