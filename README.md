@@ -96,10 +96,25 @@ L'API utilise les codes HTTP standards :
 
 ## 🧪 Tests
 
-Pour lancer les tests :
+L'application utilise Jest comme framework de test.
+
+Pour lancer les tests une fois :
 ```bash
 npm test
 ```
+
+Pour lancer les tests en mode watch (développement) :
+```bash
+npm run test:watch
+```
+
+Les tests couvrent :
+- La création de véhicules
+- La lecture de véhicules
+- La mise à jour de véhicules
+- La suppression de véhicules
+- La validation des données
+- La gestion des erreurs
 
 ## 📜 Licence
 
