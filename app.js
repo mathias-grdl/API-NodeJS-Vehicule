@@ -2,15 +2,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import pino from 'pino';
 import { pinoHttp } from 'pino-http';
-import seedData from './data/seedData.js';
 import { VehiculeAPIRoutes } from './routes/index.js';
-import { vehiculesData } from './data/vehiculesData.js';
 
 const app = express();
 
-const seed = () => {
-    vehiculesData.push(...seedData);
-}
 
 app.use(bodyParser.json());
 
@@ -31,9 +26,6 @@ app.use(pinoHttp({ logger }));
 app.get('/', (req, res) => {
     res.send('Vehicle Management API - Read Operations');
 });
-
-// Seed the data
-seed();
 
 // Initialize routes
 VehiculeAPIRoutes(app);

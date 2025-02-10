@@ -18,27 +18,27 @@ GET http://localhost:3000/vehicules
 
 
 ### Update vehicule
-PUT http://localhost:3000/vehicule/beed96ef-45ac-44cb-8130-722455206f7c
+PUT http://localhost:3000/vehicule/67a4bb27676e9ce14a6224ca
 Content-Type: application/json
 
 {
-    "brand": "vvv",
-    "model": "Passat",
+    "brand": "audi",
+    "model": "A4",
     "licensePlate": "TZ053EQ",
     "year": 2018,
     "rentalPrice": 50000
 }
 
 ### Delete vehicule
-DELETE http://localhost:3000/vehicule/beed96ef-45ac-44cb-8130-722455206f7c
+DELETE http://localhost:3000/vehicule/67a4ba4fa197f9ddd7709fd6
 
 
 ### Get vehicule by ID
-GET http://localhost:3000/vehicule/9064e6c4-9e7f-4092-bff6-f16212381252
+GET http://localhost:3000/vehicule/67a4bb27676e9ce14a6224ca
 
 
 ### Search vehicule by registration
-GET http://localhost:3000/vehicule/search/IE503DM
+GET http://localhost:3000/vehicule/search/AB123CD
 
 ### Get vehicules by price
 GET http://localhost:3000/vehicule/price/50000

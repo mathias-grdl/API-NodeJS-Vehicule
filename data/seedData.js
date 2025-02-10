@@ -40,14 +40,14 @@ for (let i = 0; i < 5; i++) {
     const rentalPrice = Math.floor(Math.random() * 50000) + 15000;
     const licensePlate = generateRandomLicensePlate();
     const year = generateRandomYear();
-    const vehicule = new Vehicule({
-        brand,
-        model,
-        rentalPrice,
-        licensePlate,
-        year
-    });
-    seedData.push(vehicule);
+    //     const vehicule = new Vehicule({
+    //         brand,
+    //         model,
+    //         rentalPrice,
+    //         licensePlate,
+    //         year
+    //     });
+    //     seedData.push(vehicule);
 }
 
 export default seedData;
