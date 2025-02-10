@@ -25,7 +25,6 @@ describe('Vehicle Router Index', () => {
                 return acc;
             }, []);
 
-        // Vérifier la présence des routes essentielles
         expect(routes).toEqual(
             expect.arrayContaining([
                 '/vehicules',
@@ -39,7 +38,6 @@ describe('Vehicle Router Index', () => {
     test('should have correct HTTP methods', () => {
         const methods = new Set();
         
-        // Parcourir récursivement pour trouver toutes les méthodes
         const findMethods = (stack) => {
             stack.forEach(layer => {
                 if (layer.route) {
@@ -54,7 +52,6 @@ describe('Vehicle Router Index', () => {
 
         findMethods(router.stack);
 
-        // Vérifier les méthodes CRUD
         expect(Array.from(methods)).toEqual(
             expect.arrayContaining(['get', 'post', 'put', 'delete'])
         );
