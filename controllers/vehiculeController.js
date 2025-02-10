@@ -63,10 +63,10 @@ async function readVehiculeById(req, res) {
     }
 }
 
-async function readVehiculeByImmatriculation(req, res) {
+async function readVehiculeByLicensePlate(req, res) {
     try {
         const vehicule = await Vehicule.findOne({
-            licensePlate: req.params.immatriculation
+            licensePlate: req.params.licensePlate
         });
         if (!vehicule) {
             return res.status(404).json({
@@ -177,7 +177,7 @@ export default {
     createVehicule,
     readVehicules,
     readVehiculeById,
-    readVehiculeByImmatriculation,
+    readVehiculeByLicensePlate,
     readVehiculeByMaxPrice,
     updateVehiculeById,
     deleteVehiculeById

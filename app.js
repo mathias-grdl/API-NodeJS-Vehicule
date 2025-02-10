@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import pino from 'pino';
 import { pinoHttp } from 'pino-http';
 import { VehiculeAPIRoutes } from './routes/index.js';
+import swaggerSetup from './swagger.js';
 
 const app = express();
 
@@ -22,7 +23,28 @@ const logger = pino({
 
 app.use(pinoHttp({ logger }));
 
-// Test route for API health check
+//swaggerUi
+swaggerSetup(app);
+
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     tags:
+ *       - Health Check
+ *     summary: API Entry Point
+ *     description: Check API health status
+ *     responses:
+ *       200:
+ *         description: API server is running normally
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               example: "Vehicle Management API - Read Operations"
+ *       500:
+ *         description: Server error
+ */
 app.get('/', (req, res) => {
     res.send('Vehicle Management API - Read Operations');
 });
