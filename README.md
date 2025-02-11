@@ -40,6 +40,44 @@ MONGODB_URI=votre_uri_mongodb
 npm start
 ```
 
+## 🐳 Docker
+
+1. Construire l'image Docker :
+```bash
+docker build -t vehicle-api-node .
+```
+
+2. Lancer le conteneur :
+```bash
+docker run -p 3000:3000 vehicle-api-node
+```
+
+3. Gérer les images et conteneurs :
+```bash
+# Lister les images Docker
+docker image ls
+
+# Lister les conteneurs en cours d'exécution
+docker container ls
+
+# Arrêter un conteneur
+docker container stop <container_id>
+```
+
+4. Publication sur Docker Hub :
+```bash
+# Construction avec votre nom d'utilisateur Docker Hub
+docker build -t mathias08g/api-vehicle .
+
+# Connexion à Docker Hub
+docker login
+
+# Publication de l'image
+docker push mathias08g/api-vehicle
+```
+
+L'API sera accessible sur `http://localhost:3000`
+
 ## 📚 Documentation API
 
 La documentation Swagger est disponible à l'adresse : `http://localhost:3000/api-docs`
