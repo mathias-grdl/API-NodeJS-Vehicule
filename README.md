@@ -1,22 +1,26 @@
 # API de Gestion de Véhicules
 
-API RESTful pour la gestion d'une flotte de véhicules développée avec Node.js, Express et MongoDB.
+API RESTful pour la gestion d'une flotte de véhicules développée avec Node.js, Express et MongoDB, déployée sur Netlify.
 
 ## 🚀 Technologies Utilisées
 
 - Node.js
 - Express.js
-- MongoDB
+- MongoDB Atlas
 - Swagger (Documentation API)
 - Pino (Logging)
+- Netlify (Hébergement Serverless)
 
 ## 📋 Prérequis
 
-- Node.js (v14 ou supérieur)
-- MongoDB
+- Node.js (v18)
+- MongoDB Atlas
+- Compte Netlify
 - npm ou yarn
 
-## 🛠️ Installation
+## 🛠️ Installation et Déploiement
+
+### Développement Local
 
 1. Cloner le dépôt :
 ```bash
@@ -35,52 +39,42 @@ Créer un fichier `.env` à la racine du projet :
 MONGODB_URI=votre_uri_mongodb
 ```
 
-4. Démarrer le serveur :
+4. Démarrer le serveur en développement :
 ```bash
 npm start
 ```
 
-## 🐳 Docker
+### Déploiement sur Netlify
 
-1. Construire l'image Docker :
+1. Installer Netlify CLI :
 ```bash
-docker build -t vehicle-api-node .
+npm install netlify-cli
 ```
 
-2. Lancer le conteneur :
+2. Se connecter à Netlify :
 ```bash
-docker run -p 3000:3000 vehicle-api-node
+npx netlify login
 ```
 
-3. Gérer les images et conteneurs :
+3. Initialiser le projet Netlify :
 ```bash
-# Lister les images Docker
-docker image ls
-
-# Lister les conteneurs en cours d'exécution
-docker container ls
-
-# Arrêter un conteneur
-docker container stop <container_id>
+npx netlify init
 ```
 
-4. Publication sur Docker Hub :
+4. Configurer les variables d'environnement dans Netlify :
+- Aller dans Site settings > Environment variables
+- Ajouter MONGODB_URI avec votre URL de connexion MongoDB Atlas
+
+5. Déployer :
 ```bash
-# Construction avec votre nom d'utilisateur Docker Hub
-docker build -t mathias08g/api-vehicle .
-
-# Connexion à Docker Hub
-docker login
-
-# Publication de l'image
-docker push mathias08g/api-vehicle
+npm run deploy
 ```
-
-L'API sera accessible sur `http://localhost:3000`
 
 ## 📚 Documentation API
 
-La documentation Swagger est disponible à l'adresse : `http://localhost:3000/api-docs`
+La documentation Swagger est disponible aux adresses :
+- Local : `http://localhost:3000/api-docs`
+- Production : `https://api-vehicles-nodejs.netlify.app/api-docs`
 
 ### Points d'entrée principaux :
 
@@ -96,17 +90,19 @@ La documentation Swagger est disponible à l'adresse : `http://localhost:3000/ap
 
 ```
 nodejs-api-vehicules/
-├── config/
-│   └── db.js
+├── netlify/
+│   └── functions/
+│       └── api.js
 ├── controllers/
 │   └── vehiculeController.js
 ├── models/
 │   └── vehiculeModel.js
 ├── routes/
 │   └── vehicules/
+├── public/
 ├── app.js
-├── index.js
-└── swagger.js
+├── swagger.js
+└── netlify.toml
 ```
 
 ## 📝 Format des Données
@@ -125,7 +121,7 @@ nodejs-api-vehicules/
 
 ## 🔒 Gestion des Erreurs
 
-L'API utilise les codes HTTP standards :
+L'API utilise les codes HTTP standards et un système de logging avec Pino :
 - 200 : Succès
 - 201 : Création réussie
 - 400 : Requête invalide
@@ -134,29 +130,26 @@ L'API utilise les codes HTTP standards :
 
 ## 🧪 Tests
 
-L'application utilise Jest comme framework de test.
-
-Pour lancer les tests une fois :
+Pour lancer les tests :
 ```bash
 npm test
 ```
 
-Pour lancer les tests en mode watch (développement) :
+Pour le mode watch :
 ```bash
 npm run test:watch
 ```
 
-Les tests couvrent :
-- La création de véhicules
-- La lecture de véhicules
-- La mise à jour de véhicules
-- La suppression de véhicules
-- La validation des données
-- La gestion des erreurs
-
 ## 📜 Licence
 
 MIT
+
+## 🔗 Liens Utiles
+
+- [API en Production](https://api-vehicles-nodejs.netlify.app)
+- [Documentation API](https://api-vehicles-nodejs.netlify.app/api-docs)
+- [MongoDB Atlas](https://www.mongodb.com/atlas/database)
+- [Netlify Dashboard](https://app.netlify.com)
 
 ## 👥 Contribution
 

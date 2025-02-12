@@ -1,0 +1,36 @@
+[build]
+  functions = "netlify/functions"
+  publish = "public"
+
+[[redirects]]
+  from = "/api-docs/*"
+  to = "/.netlify/functions/api/api-docs/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
+
+[functions]
+  external_node_modules = ["express", "cors", "body-parser", "pino", "pino-http", "swagger-ui-express", "swagger-jsdoc", "mongoose"]
+  node_bundler = "esbuild"
+  included_files = [
+    "routes/**/*",
+    "controllers/**/*",
+    "models/**/*",
+    "app.js",
+    "swagger.js"
+  ]
+
+[functions.api]
+  timeout = 10
+  memory = 1024
+  maxDuration = 10
+  [functions.api.environment]
+    NODE_VERSION = "18"
+
+[build.environment]
+  NODE_VERSION = "18"

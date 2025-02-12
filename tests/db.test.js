@@ -32,7 +32,7 @@ describe('Database Connection Tests', () => {
             expect(true).toBe(false);
         } catch (error) {
             expect(error).toBeTruthy();
-            expect(error.message).toMatch(/Server selection timed out/);
+            expect(error.message).toMatch(/getaddrinfo ENOTFOUND/);
         } finally {
             await invalidClient.close();
         }

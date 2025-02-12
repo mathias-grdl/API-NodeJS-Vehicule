@@ -2,28 +2,26 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import pino from 'pino';
 import { pinoHttp } from 'pino-http';
+import cors from 'cors';
 import { VehiculeAPIRoutes } from './routes/index.js';
 import swaggerSetup from './swagger.js';
 
 const app = express();
 
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(bodyParser.json());
 
 const logger = pino({
-    level: process.env.LOG_LEVEL || 'info',
-    transport: {
-        target: 'pino-pretty',
-        options: {
-            colorize: true,
-            destination: 1
-        }
-    },
+    level: process.env.LOG_LEVEL || 'info'
 });
 
 app.use(pinoHttp({ logger }));
 
-//swaggerUi
 swaggerSetup(app);
 
 /**
@@ -40,16 +38,27 @@ swaggerSetup(app);
  *         content:
  *           application/json:
  *             schema:
- *               type: string
- *               example: "Vehicle Management API - Read Operations"
- *       500:
- *         description: Server error
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 version:
+ *                   type: string
+ *                 status:
+ *                   type: string
  */
 app.get('/', (req, res) => {
-    res.send('Vehicle Management API - Read Operations');
+    res.json({
+        message: 'Vehicle Management API - Read Operations',
+        version: '1.0.0',
+        status: 'running'
+    });
 });
 
-// Initialize routes
+app.get('/test', (req, res) => {
+    res.json({ status: 'API is working' });
+});
+
 VehiculeAPIRoutes(app);
 
 export default app;

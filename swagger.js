@@ -1,34 +1,41 @@
-import swaggerUi from "swagger-ui-express";
-import swaggerJSDoc from "swagger-jsdoc";
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
 const options = {
     definition: {
-        openapi: "3.0.0",
+        openapi: '3.0.0',
         info: {
-            title: "Vehicle API Propelize",
-            version: "1.0.0",
-            description: "Express API for vehicle rentals",
+            title: 'Vehicles API',
+            version: '1.0.0',
+            description: 'A simple Express Vehicles API',
         },
         servers: [
             {
-                url: "http://localhost:3000",
-                description: "Development Server"
+                url: 'https://api-vehicles-nodejs.netlify.app',
+                description: 'Production server',
             },
             {
-                url: "url-server-production",
-                description: "Production Server"
+                url: 'http://localhost:3000',
+                description: 'Local server',
             },
-        ],
+        ]
     },
-    apis: [
-        "./models/VehiculeModel.js",
-        "./routes/**/*.js",
-        "./app.js",
-    ],
+    apis: ['./models/**/*.js', './app.js', './routes/**/*.js']
 };
 
-const specs = swaggerJSDoc(options);
+const swaggerSpec = swaggerJSDoc(options);
 
-export default (app) => {
-    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
-}
+const swaggerSetup = (app) => {
+    app.use('/api-docs', swaggerUi.serve);
+    app.get('/api-docs', swaggerUi.setup(swaggerSpec, {
+        explorer: true,
+        customCssUrl: 'https://cdn.jsdelivr.net/npm/swagger-ui-themes@3.0.0/themes/3.x/theme-feeling-blue.css'
+    }));
+
+    app.get('/swagger.json', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(swaggerSpec);
+    });
+};
+
+export default swaggerSetup;
