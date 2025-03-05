@@ -37,13 +37,13 @@ function generateRandomYear() {
 for (let i = 0; i < 5; i++) {
     const brand = brands[Math.floor(Math.random() * brands.length)];
     const model = models[brand][Math.floor(Math.random() * models[brand].length)];
-    const rentalPrice = Math.floor(Math.random() * 50000) + 15000;
+    const rentalPricePerDay = Math.floor(Math.random() * 50000) + 15000;
     const licensePlate = generateRandomLicensePlate();
     const year = generateRandomYear();
     //     const vehicule = new Vehicule({
     //         brand,
     //         model,
-    //         rentalPrice,
+    //         rentalPricePerDay,
     //         licensePlate,
     //         year
     //     });

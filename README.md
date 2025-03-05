@@ -115,7 +115,7 @@ nodejs-api-vehicules/
   "model": "string",
   "licensePlate": "string",
   "year": "number",
-  "rentalPrice": "number"
+  "rentalPricePerDay": "number"
 }
 ```
 

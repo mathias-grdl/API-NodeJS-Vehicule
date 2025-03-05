@@ -17,23 +17,23 @@ describe('GET /vehicule routes', () => {
             {
                 brand: 'Brand1',
                 model: 'Model1',
-                licensePlate: 'READ1',  
+                licensePlate: 'READ1',
                 year: 2020,
-                rentalPrice: 100
+                rentalPricePerDay: 100
             },
             {
                 brand: 'Brand2',
                 model: 'Model2',
-                licensePlate: 'READ2',  
+                licensePlate: 'READ2',
                 year: 2021,
-                rentalPrice: 150
+                rentalPricePerDay: 150
             },
             {
                 brand: 'Brand3',
                 model: 'Model3',
-                licensePlate: 'READ3',  
+                licensePlate: 'READ3',
                 year: 2022,
-                rentalPrice: 200
+                rentalPricePerDay: 200
             }
         ];
 
@@ -59,7 +59,7 @@ describe('GET /vehicule routes', () => {
     test('should get vehicle by ID', async () => {
         const vehicle = await Vehicule.findOne({ licensePlate: 'READ1' });
         const foundVehicle = await Vehicule.findById(vehicle._id);
-        
+
         expect(foundVehicle).toBeTruthy();
         expect(foundVehicle.brand).toBe('Brand1');
         expect(foundVehicle.licensePlate).toBe('READ1');
@@ -84,14 +84,14 @@ describe('GET /vehicule routes', () => {
     });
 
     test('should get vehicles by max price', async () => {
-        const vehicles = await Vehicule.find({ rentalPrice: { $lte: 150 } });
+        const vehicles = await Vehicule.find({ rentalPricePerDay: { $lte: 150 } });
         expect(vehicles).toHaveLength(2);
-        expect(vehicles[0].rentalPrice).toBeLessThanOrEqual(150);
-        expect(vehicles[1].rentalPrice).toBeLessThanOrEqual(150);
+        expect(vehicles[0].rentalPricePerDay).toBeLessThanOrEqual(150);
+        expect(vehicles[1].rentalPricePerDay).toBeLessThanOrEqual(150);
     });
 
     test('should return empty array when no vehicles below max price', async () => {
-        const vehicles = await Vehicule.find({ rentalPrice: { $lte: 50 } });
+        const vehicles = await Vehicule.find({ rentalPricePerDay: { $lte: 50 } });
         expect(vehicles).toHaveLength(0);
     });
 });

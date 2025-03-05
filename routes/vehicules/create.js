@@ -31,7 +31,6 @@ const router = express.Router();
  *       500:
  *         description: Server error
  */
-
-router.post('/vehicule', vehiculeController.createVehicule)
+router.post('/vehicule', vehiculeController.createVehicule);
 
 export default router;

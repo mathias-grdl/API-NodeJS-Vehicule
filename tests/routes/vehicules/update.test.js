@@ -18,7 +18,7 @@ describe('PUT /vehicule/:id', () => {
             model: 'Test Model',
             licensePlate: 'UPDATE1',
             year: 2020,
-            rentalPrice: 100
+            rentalPricePerDay: 100
         });
         await testVehicule.save();
     });
@@ -34,7 +34,7 @@ describe('PUT /vehicule/:id', () => {
     test('should update vehicle successfully', async () => {
         const updateData = {
             brand: 'Updated Brand',
-            rentalPrice: 150
+            rentalPricePerDay: 150
         };
 
         const response = await Vehicule.findByIdAndUpdate(
@@ -45,7 +45,7 @@ describe('PUT /vehicule/:id', () => {
 
         expect(response).toBeTruthy();
         expect(response.brand).toBe('Updated Brand');
-        expect(response.rentalPrice).toBe(150);
+        expect(response.rentalPricePerDay).toBe(150);
         expect(response.model).toBe('Test Model');
     });
 
@@ -74,7 +74,7 @@ describe('PUT /vehicule/:id', () => {
     test('should validate required fields', async () => {
         const invalidData = {
             brand: '',
-            rentalPrice: -100
+            rentalPricePerDay: -100
         };
 
         try {

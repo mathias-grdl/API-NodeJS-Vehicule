@@ -25,7 +25,7 @@ describe('POST /vehicule', () => {
             model: 'Test Model',
             licensePlate: 'CREATE1',
             year: 2020,
-            rentalPrice: 100
+            rentalPricePerDay: 100
         };
 
         const vehicule = new Vehicule(vehiculeData);
@@ -36,7 +36,7 @@ describe('POST /vehicule', () => {
         expect(savedVehicule.model).toBe(vehiculeData.model);
         expect(savedVehicule.licensePlate).toBe(vehiculeData.licensePlate);
         expect(savedVehicule.year).toBe(vehiculeData.year);
-        expect(savedVehicule.rentalPrice).toBe(vehiculeData.rentalPrice);
+        expect(savedVehicule.rentalPricePerDay).toBe(vehiculeData.rentalPricePerDay);
     });
 
     test('should fail when required field is missing', async () => {
@@ -59,7 +59,7 @@ describe('POST /vehicule', () => {
             model: 'Test Model',
             licensePlate: 'CREATE2',
             year: 2020,
-            rentalPrice: 100
+            rentalPricePerDay: 100
         };
 
         await new Vehicule(vehiculeData).save();
@@ -79,7 +79,7 @@ describe('POST /vehicule', () => {
             model: 'Test Model',
             licensePlate: 'TEST123',
             year: 1800,
-            rentalPrice: 100
+            rentalPricePerDay: 100
         });
 
         try {
@@ -97,7 +97,7 @@ describe('POST /vehicule', () => {
             model: 'Test Model',
             licensePlate: 'TEST123',
             year: 2020,
-            rentalPrice: -50
+            rentalPricePerDay: -50
         });
 
         try {

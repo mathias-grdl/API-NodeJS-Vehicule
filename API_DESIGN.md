@@ -18,7 +18,7 @@ http://localhost:3000
 | model          | string | Vehicle model name             | Yes      |
 | registrationNo | string | License plate number           | Yes      |
 | year           | number | Manufacturing year             | Yes      |
-| rentalPrice          | number | Vehicle rental price in EUR           | Yes      |
+| rentalPricePerDay          | number | Vehicle rental price in EUR           | Yes      |
 
 ## API Endpoints
 

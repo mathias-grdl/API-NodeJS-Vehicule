@@ -18,7 +18,7 @@ describe('DELETE /vehicule/:id', () => {
             model: 'Test Model',
             licensePlate: 'DELETE1',
             year: 2020,
-            rentalPrice: 100
+            rentalPricePerDay: 100
         });
         await testVehicule.save();
     });

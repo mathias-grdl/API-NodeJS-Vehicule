@@ -99,7 +99,7 @@ async function readVehiculeByMaxPrice(req, res) {
                 error: 'Price must be a number'
             });
         }
-        const vehicules = await Vehicule.find({ rentalPrice: { $lte: maxPrice } });
+        const vehicules = await Vehicule.find({ rentalPricePerDayPerDay: { $lte: maxPrice } });
         return res.status(200).json({
             success: true,
             count: vehicules.length,

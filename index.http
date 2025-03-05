@@ -6,11 +6,11 @@ POST http://localhost:3000/vehicule
 Content-Type: application/json
 
 {
-    "brand": "audi",
+    "brand": "Merco",
     "model": "A4",
     "licensePlate": "AB123CD",
     "year": 2019,
-    "rentalPrice": 15000
+    "rentalPricePerDay": 15000
 }
 
 ### Get all vehicules
@@ -18,7 +18,7 @@ GET http://localhost:3000/vehicules
 
 
 ### Update vehicule
-PUT http://localhost:3000/vehicule/67a4bb27676e9ce14a6224ca
+PUT http://localhost:3000/vehicule/67ac8efe7d8a668e837b7e62
 Content-Type: application/json
 
 {
@@ -26,7 +26,21 @@ Content-Type: application/json
     "model": "A4",
     "licensePlate": "TZ053EQ",
     "year": 2018,
-    "rentalPrice": 50000
+    "rentalPricePerDay": 50000,
+    "rentalDates": [
+        {
+            "startDate": "2024-01-01T00:00:00Z",
+            "endDate": "2024-01-05T00:00:00Z"
+        },
+        {
+            "startDate": "2024-01-10T00:00:00Z",
+            "endDate": "2024-01-15T00:00:00Z"
+        },
+        {
+            "startDate": "2024-02-01T00:00:00Z",
+            "endDate": "2024-02-05T00:00:00Z"
+        }
+    ]
 }
 
 ### Delete vehicule
