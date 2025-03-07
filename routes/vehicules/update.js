@@ -1,5 +1,6 @@
 import express from 'express';
-import vehiculeController from '../../controllers/vehiculeController.js';
+import { requireAuth } from '../../middleware/authentification.js';
+import { updateVehicule } from '../../controllers/vehiculeController.js';
 
 const router = express.Router();
 
@@ -8,39 +9,46 @@ const router = express.Router();
  * /vehicule/{id}:
  *   put:
  *     summary: Update a vehicle
- *     description: Updates an existing vehicle's information in the system
+ *     description: Update an existing vehicle by ID
  *     tags:
- *      - Vehicles
+ *       - Vehicles
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: ID of the vehicle to update
  *         schema:
  *           type: string
+ *         description: Vehicle ID
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Vehicule'
+ *             type: object
+ *             properties:
+ *               brand:
+ *                 type: string
+ *               model:
+ *                 type: string
+ *               licensePlate:
+ *                 type: string
+ *               year:
+ *                 type: number
+ *               rentalPrice:
+ *                 type: number
  *     responses:
  *       200:
  *         description: Vehicle updated successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Vehicle updated successfully"
+ *       400:
+ *         description: Invalid data provided
+ *       401:
+ *         description: Unauthorized - Authentication required
  *       404:
  *         description: Vehicle not found
  *       500:
  *         description: Server error
  */
-
-router.put('/vehicule/:id', vehiculeController.updateVehiculeById)
-
+router.put('/:id', requireAuth, vehiculeController.updateVehiculeById);
 export default router;

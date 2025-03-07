@@ -1,5 +1,6 @@
 import express from 'express';
-import vehiculeController from '../../controllers/vehiculeController.js';
+import { requireAuth } from '../../middleware/authentification.js';
+import { deleteVehicule } from '../../controllers/vehiculeController.js';
 
 const router = express.Router();
 
@@ -8,33 +9,27 @@ const router = express.Router();
  * /vehicule/{id}:
  *   delete:
  *     summary: Delete a vehicle
- *     description: Deletes a vehicle from the system by its ID
+ *     description: Remove a vehicle from the database by ID
  *     tags:
- *      - Vehicles
+ *       - Vehicles
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: ID of the vehicle to delete
  *         schema:
  *           type: string
+ *         description: Vehicle ID
  *     responses:
  *       200:
  *         description: Vehicle deleted successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Vehicle deleted successfully"
+ *       401:
+ *         description: Unauthorized - Authentication required
  *       404:
  *         description: Vehicle not found
  *       500:
  *         description: Server error
  */
-
-router.delete('/vehicule/:id', vehiculeController.deleteVehiculeById)
-
+router.delete('/:id', requireAuth, vehiculeController.deleteVehiculeById);
 export default router;

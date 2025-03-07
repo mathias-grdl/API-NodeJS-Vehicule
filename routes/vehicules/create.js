@@ -1,5 +1,6 @@
 import express from 'express';
-import vehiculeController from '../../controllers/vehiculeController.js';
+import { requireAuth } from '../../middleware/authentification.js';
+import { createVehicule } from '../../controllers/vehiculeController.js';
 
 const router = express.Router();
 
@@ -7,31 +8,44 @@ const router = express.Router();
  * @swagger
  * /vehicule:
  *   post:
- *     summary: Create a new vehicule
- *     description: Creates a new vehicle in the system with the provided details
- *     tags: 
- *      - Vehicles
+ *     summary: Create new vehicle
+ *     description: Add a new vehicle to the database
+ *     tags:
+ *       - Vehicles
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Vehicule'
+ *             type: object
+ *             required:
+ *               - brand
+ *               - model
+ *               - licensePlate
+ *               - year
+ *               - rentalPrice
+ *             properties:
+ *               brand:
+ *                 type: string
+ *               model:
+ *                 type: string
+ *               licensePlate:
+ *                 type: string
+ *               year:
+ *                 type: number
+ *               rentalPrice:
+ *                 type: number
  *     responses:
  *       201:
  *         description: Vehicle created successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Vehicle created successfully"
+ *       400:
+ *         description: Invalid data provided
+ *       401:
+ *         description: Unauthorized - Authentication required
  *       500:
  *         description: Server error
  */
-
-router.post('/vehicule', vehiculeController.createVehicule)
-
+router.post('/', requireAuth, vehiculeController.createVehicule);
 export default router;

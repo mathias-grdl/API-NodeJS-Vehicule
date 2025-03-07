@@ -4,25 +4,27 @@ GET http://localhost:3000/
 ### Create new vehicule
 POST http://localhost:3000/vehicule
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2NhYjdiODZjNmE5NGRiOTM5NDU4NjciLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MTM0MjQ1NiwiZXhwIjoxNzQxNDI4ODU2fQ.rrUw_A1QDX9wmjJkUD2IXzdi9Iw0XS55CMDfHtFC7uk
 
 {
-    "brand": "audi",
-    "model": "A4",
-    "licensePlate": "AB123CD",
+    "brand": "audi0",
+    "model": "A45",
+    "licensePlate": "AB1s33D",
     "year": 2019,
     "rentalPrice": 15000
 }
 
 ### Get all vehicules
-GET http://localhost:3000/vehicules
-
+GET http://localhost:3000/vehicule
 
 ### Update vehicule
-PUT http://localhost:3000/vehicule/67a4bb27676e9ce14a6224ca
+PUT http://localhost:3000/vehicule/67ac8efe7d8a668e837b7e62
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2NhYjdiODZjNmE5NGRiOTM5NDU4NjciLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MTM0MjQ1NiwiZXhwIjoxNzQxNDI4ODU2fQ.rrUw_A1QDX9wmjJkUD2IXzdi9Iw0XS55CMDfHtFC7uk
+
 
 {
-    "brand": "audi",
+    "brand": "audiiiii",
     "model": "A4",
     "licensePlate": "TZ053EQ",
     "year": 2018,
@@ -30,17 +32,36 @@ Content-Type: application/json
 }
 
 ### Delete vehicule
-DELETE http://localhost:3000/vehicule/67a4ba4fa197f9ddd7709fd6
+DELETE http://localhost:3000/vehicule/67ac988e7ec92a35a6ac3416
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2NhYjdiODZjNmE5NGRiOTM5NDU4NjciLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MTM0MjQ1NiwiZXhwIjoxNzQxNDI4ODU2fQ.rrUw_A1QDX9wmjJkUD2IXzdi9Iw0XS55CMDfHtFC7uk
 
 
 ### Get vehicule by ID
-GET http://localhost:3000/vehicule/67a4bb27676e9ce14a6224ca
+GET http://localhost:3000/vehicule/67ac9850c5215a1ed7a83c5a
 
 
 ### Search vehicule by registration
-GET http://localhost:3000/vehicule/search/TZ053EQ
+GET http://localhost:3000/vehicule/search/AB123CD
 
 ### Get vehicules by price
 GET http://localhost:3000/vehicule/price/50000
 
 
+### Create new user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "bbbbbbb",
+    "email": "bbbbbb@gmail.com",
+    "password": "bbbbbbb"
+}
+
+### Login user
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "email": "bbbbbb@gmail.com",
+    "password": "bbbbbbb"
+}

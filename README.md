@@ -10,13 +10,14 @@ API RESTful pour la gestion d'une flotte de véhicules développée avec Node.js
 - Swagger (Documentation API)
 - Pino (Logging)
 - Netlify (Hébergement Serverless)
+- JWT (Authentification)
 
 ## 📋 Prérequis
 
-- Node.js (v18)
+- Node.js (v18+)
 - MongoDB Atlas
 - Compte Netlify
-- npm ou yarn
+- npm ou pnpm
 
 ## 🛠️ Installation et Déploiement
 
@@ -31,24 +32,32 @@ cd nodejs-api-vehicules
 2. Installer les dépendances :
 ```bash
 npm install
+# ou avec pnpm
+pnpm install
 ```
 
 3. Configurer les variables d'environnement :
-Créer un fichier `.env` à la racine du projet :
+Créer un fichier `.env` à la racine du projet en vous basant sur le fichier `.env.exemple` :
 ```env
 MONGODB_URI=votre_uri_mongodb
+JWT_SECRET=votre_clé_secrète_pour_jwt
+PORT=3000
 ```
 
 4. Démarrer le serveur en développement :
 ```bash
 npm start
+# ou
+pnpm start
 ```
+
+5. L'API est accessible à l'adresse : `http://localhost:3000`
 
 ### Déploiement sur Netlify
 
 1. Installer Netlify CLI :
 ```bash
-npm install netlify-cli
+npm install netlify-cli -g
 ```
 
 2. Se connecter à Netlify :
@@ -62,12 +71,15 @@ npx netlify init
 ```
 
 4. Configurer les variables d'environnement dans Netlify :
-- Aller dans Site settings > Environment variables
-- Ajouter MONGODB_URI avec votre URL de connexion MongoDB Atlas
+   - Aller dans Site settings > Environment variables
+   - Ajouter MONGODB_URI avec votre URL de connexion MongoDB Atlas
+   - Ajouter JWT_SECRET pour la sécurité des tokens d'authentification
 
 5. Déployer :
 ```bash
 npm run deploy
+# ou
+pnpm run deploy
 ```
 
 ## 📚 Documentation API
@@ -78,31 +90,44 @@ La documentation Swagger est disponible aux adresses :
 
 ### Points d'entrée principaux :
 
-- GET `/vehicules` - Liste tous les véhicules
+#### Véhicules
+- GET `/vehicule` - Liste tous les véhicules
 - GET `/vehicule/:id` - Récupère un véhicule par son ID
-- POST `/vehicule` - Crée un nouveau véhicule
-- PUT `/vehicule/:id` - Met à jour un véhicule
-- DELETE `/vehicule/:id` - Supprime un véhicule
+- POST `/vehicule` - Crée un nouveau véhicule (authentification requise)
+- PUT `/vehicule/:id` - Met à jour un véhicule (authentification requise)
+- DELETE `/vehicule/:id` - Supprime un véhicule (authentification requise)
 - GET `/vehicule/search/:licensePlate` - Recherche par plaque d'immatriculation
 - GET `/vehicule/price/:max` - Filtre les véhicules par prix maximum
+
+#### Utilisateurs
+- POST `/users/register` - Création d'un compte utilisateur
+- POST `/users/login` - Authentification et obtention d'un token JWT
 
 ## 🔍 Structure du Projet
 
 ```
 nodejs-api-vehicules/
+├── config/
+│   └── db.js                 # Configuration de la base de données
+├── controllers/
+│   ├── userController.js     # Logique pour les utilisateurs
+│   └── vehiculeController.js # Logique pour les véhicules
+├── middleware/
+│   └── authentification.js   # Middleware d'authentification JWT
+├── models/
+│   ├── userModel.js          # Schéma utilisateur
+│   └── vehiculeModel.js      # Schéma véhicule
+├── routes/
+│   ├── index.js              # Routeur principal
+│   ├── users/                # Routes utilisateur
+│   └── vehicules/            # Routes véhicule
 ├── netlify/
 │   └── functions/
-│       └── api.js
-├── controllers/
-│   └── vehiculeController.js
-├── models/
-│   └── vehiculeModel.js
-├── routes/
-│   └── vehicules/
-├── public/
-├── app.js
-├── swagger.js
-└── netlify.toml
+│       └── api.js            # Point d'entrée pour Netlify Functions
+├── tests/                    # Tests unitaires et d'intégration
+├── app.js                    # Configuration Express
+├── index.js                  # Point d'entrée de l'application
+└── swagger.js                # Configuration Swagger
 ```
 
 ## 📝 Format des Données
@@ -119,12 +144,24 @@ nodejs-api-vehicules/
 }
 ```
 
+### Utilisateur
+
+```json
+{
+  "username": "string",
+  "email": "string",
+  "password": "string"
+}
+```
+
 ## 🔒 Gestion des Erreurs
 
 L'API utilise les codes HTTP standards et un système de logging avec Pino :
 - 200 : Succès
 - 201 : Création réussie
 - 400 : Requête invalide
+- 401 : Non autorisé (authentification requise)
+- 403 : Accès refusé (droits insuffisants)
 - 404 : Ressource non trouvée
 - 500 : Erreur serveur
 
@@ -133,11 +170,15 @@ L'API utilise les codes HTTP standards et un système de logging avec Pino :
 Pour lancer les tests :
 ```bash
 npm test
+# ou
+pnpm test
 ```
 
 Pour le mode watch :
 ```bash
 npm run test:watch
+# ou
+pnpm run test:watch
 ```
 
 ## 📜 Licence

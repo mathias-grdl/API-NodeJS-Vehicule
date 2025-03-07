@@ -1,11 +1,11 @@
 import express from 'express';
-import vehiculeController from '../../controllers/vehiculeController.js';
+import { requireAuth } from '../../middleware/authentification.js';
+import { readVehicules, readVehiculeById, readVehiculeByLicensePlate, readVehiculeByPrice } from '../../controllers/vehiculeController.js';
 
 const router = express.Router();
-
 /**
  * @swagger
- * /vehicules:
+ * /vehicule:
  *   get:
  *     summary: Get all vehicles
  *     description: Retrieve a list of all vehicles in the system
@@ -14,17 +14,10 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: List of vehicles retrieved successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Vehicule'
  *       500:
  *         description: Server error
  */
-
-router.get('/vehicules', vehiculeController.readVehicules)
+router.get('/', vehiculeController.readVehicules);
 
 /**
  * @swagger
@@ -38,85 +31,60 @@ router.get('/vehicules', vehiculeController.readVehicules)
  *       - in: path
  *         name: id
  *         required: true
- *         description: ID of the vehicle to retrieve
  *         schema:
  *           type: string
+ *         description: Vehicle ID
  *     responses:
  *       200:
- *         description: Vehicle found
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Vehicule'
+ *         description: Vehicle retrieved successfully
  *       404:
  *         description: Vehicle not found
- *       500:
- *         description: Server error
  */
-
-router.get('/vehicule/:id', vehiculeController.readVehiculeById)
+router.get('/:id', vehiculeController.readVehiculeById);
 
 /**
  * @swagger
  * /vehicule/search/{licensePlate}:
  *   get:
  *     summary: Search vehicle by license plate
- *     description: Find a vehicle using its license plate number
+ *     description: Find a vehicle by its license plate number
  *     tags:
  *       - Vehicles
  *     parameters:
  *       - in: path
  *         name: licensePlate
  *         required: true
- *         description: License plate number to search for
  *         schema:
  *           type: string
+ *         description: License plate number
  *     responses:
  *       200:
- *         description: Vehicle found
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Vehicule'
+ *         description: Vehicle found successfully
  *       404:
- *         description: Vehicle not found
- *       500:
- *         description: Server error
+ *         description: No vehicle found with this license plate
  */
-
-router.get('/vehicule/search/:licensePlate', vehiculeController.readVehiculeByLicensePlate)
+router.get('/search/:licensePlate', vehiculeController.readVehiculeByLicensePlate);
 
 /**
  * @swagger
  * /vehicule/price/{max}:
  *   get:
  *     summary: Get vehicles by maximum price
- *     description: Retrieve all vehicles with a rental price below the specified maximum
+ *     description: Filter vehicles by a maximum rental price value
  *     tags:
  *       - Vehicles
  *     parameters:
  *       - in: path
  *         name: max
  *         required: true
- *         description: Maximum rental price
  *         schema:
  *           type: number
+ *         description: Maximum rental price
  *     responses:
  *       200:
- *         description: List of vehicles retrieved successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Vehicule'
- *       400:
- *         description: Invalid maximum price
- *       500:
- *         description: Server error
+ *         description: Vehicles retrieved successfully
+ *       404:
+ *         description: No vehicles found within price range
  */
-
-router.get('/vehicule/price/:max', vehiculeController.readVehiculeByMaxPrice)
-
-const readVehiculeRouter = router;
-export default readVehiculeRouter;
+router.get('/price/:max', vehiculeController.readVehiculeByMaxPrice);
+export default router;
